@@ -1,0 +1,95 @@
+﻿@model GenerateQRCode_Demo.Models.GenerateQRCodeModel
+
+@{
+    ViewData["Title"] = "CreateQRCode";
+}
+<style>
+    .pos-center {
+        margin: 0 auto;
+        vertical-align: middle;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .form-group {
+        margin: 10px 0;
+    }
+</style>
+
+<h1>CreateQRCode</h1>
+
+<div class="row">
+    <div class="">
+        <form asp-action="CreateQRCode" method="post" enctype = "multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="QRCodeText" class="control-label"></label>
+                <input asp-for="QRCodeText" class="form-control" />
+                <span asp-validation-for="QRCodeText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Generate QR Code" class="btn btn-primary" />
+            </div>
+        </form>
+        <br/>
+        <h2>Import file and generate QR:</h2>
+        <form asp-controller="Home" asp-action="UploadFileThenGenQR" method="post" enctype="multipart/form-data">
+            <input type="file" id="myFile" name="file"/>
+            <!--<input type="file" id="myFile" name="file" onchange="pickAFile(this)"/>-->
+            <button type="submit" class="btn btn-primary">Upload File & Gen QR</button>
+        </form>
+        @if (ViewBag.listDisplay != null && ViewBag.listDisplay.Count > 0)
+        {
+            foreach(var item in ViewBag.listDisplay)
+            {
+                <div class="container pos-center">
+                    <div class="form-group">
+                    <img src="@item.QRCodeUri" class="img-thumbnail" />
+                    </div>
+                </div>
+                <div class="container pos-center">
+                    <a id="download + @item.No" style="" download="qr-@item.No" href="@item.LinkDownload" class="btn btn-primary">Download</a>
+                 </div>
+                 <br/>
+            }    
+        }
+        @if (ViewBag.QrCodeUri != null)
+        {
+            <div class="container pos-center">
+                <div class="form-group">
+                <img src="@ViewBag.QrCodeUri" class="img-thumbnail" />
+                </div>
+            </div>
+            <div class="container pos-center">
+                <a id="download" style="" download="qr-code" href="@ViewBag.linkDownload" class="btn btn-primary">Download</a>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+//window.onload = function downloadImg() {
+//    document.getElementById("download").click();
+//};
+
+function pickAFile() { 
+    var fileName = document.getElementById('myFile').value.substr(12);
+    console.log(fileName);
+    $.ajax({
+        type: "post",
+        url: "/Home/PickAFile",
+        data: {
+            fileName: fileName
+        },
+        success: function(d) {
+            console.log('Success!');
+            console.log('path: ' + d)
+        }
+    });
+};
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
