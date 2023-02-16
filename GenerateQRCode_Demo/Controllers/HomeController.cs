@@ -120,8 +120,11 @@ namespace GenerateQRCode_Demo.Controllers
         public async Task<IActionResult> UploadFileThenGenQR(IFormFile file)
         {
             #region Upload file
-            if (file == null || file.Length == 0)
-                return Content("file not selected");
+            if (file == null || file.Length == 0) 
+            {
+                ViewBag.FileNotSelected = "File not selected!";
+                return View("~/Views/Shared/Error.cshtml");
+            }
 
             var path = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot",
