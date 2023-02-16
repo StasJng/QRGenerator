@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sM+Z3ghhdbkJ82lRn+9U7tYf54L7hbfqINKsBcf3a6DBJ4hgvlX6K7jgpP/DrvROCHtFmBiIRkCC0a6M2U6AQA==",
+  "dgSpecHash": "JG1oxxIGHlqFgGyX2/jYV1pBt6A5N+711IJZp0wofQHFhwol+db38XECyUb96oK3qjnG17PUSTE5zZOPdfDPIw==",
   "success": true,
-  "projectFilePath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
+  "projectFilePath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\barcode\\2022.3.0\\barcode.2022.3.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",

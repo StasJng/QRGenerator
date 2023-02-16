@@ -14,6 +14,12 @@
     .form-group {
         margin: 10px 0;
     }
+    .box-qr {
+        border: 1px solid #cdcdcd;
+        border-radius: 10px;
+        padding: 10px 0;
+        margin: -5px;
+    }
 </style>
 
 <h1>CreateQRCode</h1>
@@ -40,18 +46,21 @@
         </form>
         @if (ViewBag.listDisplay != null && ViewBag.listDisplay.Count > 0)
         {
-            foreach(var item in ViewBag.listDisplay)
-            {
-                <div class="container pos-center">
-                    <div class="form-group">
-                    <img src="@item.QRCodeUri" class="img-thumbnail" />
+            <div class="row" style="margin: 10px 0 0 0">
+                @foreach(var item in ViewBag.listDisplay)
+                {
+                    <div class="col-3 box-qr">
+                        <div class="container pos-center">
+                            <div class="form-group">
+                            <img src="@item.QRCodeUri" class="img-thumbnail" />
+                            </div>
+                        </div>
+                        <div class="container pos-center">
+                            <a id="download + @item.No" style="" download="qr-@item.No" href="@item.LinkDownload" class="btn btn-primary">Download</a>
+                            </div>
                     </div>
-                </div>
-                <div class="container pos-center">
-                    <a id="download + @item.No" style="" download="qr-@item.No" href="@item.LinkDownload" class="btn btn-primary">Download</a>
-                 </div>
-                 <br/>
-            }    
+                }   
+            </div>
         }
         @if (ViewBag.QrCodeUri != null)
         {

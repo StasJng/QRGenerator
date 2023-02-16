@@ -8752,11 +8752,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
+      "projectUniqueName": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
       "projectName": "GenerateQRCode_Demo",
-      "projectPath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
+      "projectPath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\GenerateQRCode_Demo.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\GenerateQRCode_Demo\\obj\\",
+      "outputPath": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
