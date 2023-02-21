@@ -33,54 +33,72 @@ namespace GenerateQRCode_Demo.Controllers
         {
             try
             {
-                GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(generateQRCode.QRCodeText, 200);
-                barcode.AddBarcodeValueTextBelowBarcode();
+                #region Generate QR Image
+                GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(generateQRCode.QRCodeText, 95);
+                //barcode.AddBarcodeValueTextBelowBarcode();
                 // Styling a QR code and adding annotation text
                 barcode.SetMargins(5);
-                barcode.ChangeBarCodeColor(Color.Black);
+                barcode.ChangeBarCodeColor(Color.Gray);
+                #endregion
 
+                #region QR code image to Server
                 string path = Path.Combine(_environment.WebRootPath, "GeneratedQRCode");
                 if (!Directory.Exists(path))
                 {
                     Directory.CreateDirectory(path);
                 }
                 string filePath = Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode.png");
+                if (System.IO.File.Exists(filePath)) { 
+                    System.IO.File.Delete(filePath);
+                };
                 barcode.SaveAsPng(filePath);
-                string fileName = Path.GetFileName(filePath);
-                string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}"+ "/GeneratedQRCode/" + fileName;
 
-                ViewBag.QrCodeUri = imageUrl;
+                #endregion
+
+                #region Create QR Image with Background Image (Watermarking !?)
+                //Image backgorundImage = Image.FromFile(@"C:\\Users\\User\\Desktop\\voucherForm.jpg");
+                Image backgorundImage = Image.FromFile("assets/img/voucherForm.jpg");
+                Image imageQR = Image.FromFile(Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode.png"));
+                Graphics outputDemo = Graphics.FromImage(backgorundImage);
+                //outputDemo.DrawImage(imageQR, backgorundImage.Width / 2 + 305, backgorundImage.Height / 2 + 105);
+                outputDemo.DrawImage(imageQR, 50, 50);
+                backgorundImage.Save("assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
+
+                string imgDemoUrl = Path.Combine(_environment.ContentRootPath, "assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
+                MemoryStream msDemo = new MemoryStream();
+                Image img = Image.FromFile(imgDemoUrl);
+                img.Save(msDemo, System.Drawing.Imaging.ImageFormat.Png);
+                ViewBag.QrCodeUri = "data:image/png;base64," + Convert.ToBase64String(msDemo.ToArray());
+                ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(msDemo.ToArray());
+                msDemo.Flush();
+                msDemo.Close();
+                msDemo.Dispose();
+                imageQR.Dispose();
+                backgorundImage.Dispose();
+                #endregion
+
+                //Set & Show QR Image only(older version)
+                //string fileName = Path.GetFileName(filePath);
+                //string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedQRCode/" + fileName;
+                ////ViewBag.QrCodeUri = imageUrl;
 
                 //WebClient client = new WebClient();
                 //Stream stream = client.OpenRead(imageUrl);
-                //Bitmap bitmap; 
-                //bitmap = new Bitmap(stream);
 
-                //if (bitmap != null)
+                //using (MemoryStream ms = new MemoryStream())
                 //{
-                //    bitmap.Save("qr_img_for_" + generateQRCode.QRCodeText, ImageFormat.Png);
+                //    using (Bitmap bitMap = new Bitmap(stream))
+                //    {
+                //        if (bitMap != null)
+                //        {
+                //            bitMap.Save(ms, ImageFormat.Png);
+                //        }
+                //        var qrResult = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                //        ViewBag.qrString = qrResult;
+                //        ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                //    }
                 //}
 
-                //stream.Flush();
-                //stream.Close();
-                //client.Dispose();
-
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead(imageUrl);
-
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (Bitmap bitMap = new Bitmap(stream))
-                    {
-                        if (bitMap != null)
-                        {
-                            bitMap.Save(ms, ImageFormat.Png);
-                        }
-                        var qrResult = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
-                        ViewBag.qrString = qrResult;
-                        ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
-                    }
-                }
             }
             catch (Exception ex)
             {
@@ -160,9 +178,10 @@ namespace GenerateQRCode_Demo.Controllers
                     rowNum++;
                     GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(code.QRCodeText, 200);
                     barcode.AddBarcodeValueTextBelowBarcode();
+                    barcode.StampToExistingPdfPage(@"C:\\Users\\User\\Desktop\\demoImport.pdf", 0, 0, 1, null); 
 
                     // Styling a QR code and adding annotation text
-                    barcode.SetMargins(5);
+                    barcode.SetMargins(5, 5, 0, 5);
                     barcode.ChangeBarCodeColor(Color.Black);
 
                     string imageQRPath = Path.Combine(_environment.WebRootPath, "GeneratedQRCode");
@@ -200,6 +219,10 @@ namespace GenerateQRCode_Demo.Controllers
                     });
 
                     ViewBag.listDisplay = lstDisplay;
+
+                    //stream.Flush();
+                    //stream.Close();
+                    //client.Dispose();
                 }
                 #endregion
             }
