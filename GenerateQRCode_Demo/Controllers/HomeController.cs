@@ -57,7 +57,7 @@ namespace GenerateQRCode_Demo.Controllers
 
                 #region Create QR Image with Background Image (Watermarking !?)
                 //Image backgorundImage = Image.FromFile(@"C:\\Users\\User\\Desktop\\voucherForm.jpg");
-                Image backgorundImage = Image.FromFile("assets/img/voucherForm.jpg");
+                Image backgorundImage = Image.FromFile("assets/img/voucherForm.png");
                 Image imageQR = Image.FromFile(Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode.png"));
                 Graphics outputDemo = Graphics.FromImage(backgorundImage);
                 //outputDemo.DrawImage(imageQR, backgorundImage.Width / 2 + 305, backgorundImage.Height / 2 + 105);
@@ -178,7 +178,7 @@ namespace GenerateQRCode_Demo.Controllers
                     rowNum++;
                     GeneratedBarcode barcode = QRCodeWriter.CreateQrCode(code.QRCodeText, 200);
                     barcode.AddBarcodeValueTextBelowBarcode();
-                    barcode.StampToExistingPdfPage(@"C:\\Users\\User\\Desktop\\demoImport.pdf", 0, 0, 1, null); 
+                    //barcode.StampToExistingPdfPage(@"C:\\Users\\User\\Desktop\\demoImport.pdf", 0, 0, 1, null); 
 
                     // Styling a QR code and adding annotation text
                     barcode.SetMargins(5, 5, 0, 5);
