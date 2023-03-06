@@ -144,6 +144,14 @@ namespace GenerateQRCode_Demo.Controllers
                 return View("~/Views/Shared/Error.cshtml");
             }
 
+            string fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension != ".xlsx" && fileExtension != ".xls")
+            {
+                ViewBag.FileNotSelected = "Support Excel File only!";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+
             var path = Path.Combine(
                         Directory.GetCurrentDirectory(), "wwwroot",
                         file.GetFilename());

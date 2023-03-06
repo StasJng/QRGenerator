@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0cX+YQCuZjaNl7g5F9H9A+9wWLNJMK5Mta35BYjxwoM=",
+  "Hash": "W1oUpXRBG8az+K82Rap98mnkquOSOBHjCpYlL0JDdvo=",
   "Source": "GenerateQRCode_Demo",
   "BasePath": "_content/GenerateQRCode_Demo",
   "Mode": "Default",
@@ -66,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\demoImport.pdf",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "demoImport.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\demoImport.pdf"
     },
     {
       "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\favicon.ico",
