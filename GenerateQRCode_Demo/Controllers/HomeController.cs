@@ -47,10 +47,24 @@ namespace GenerateQRCode_Demo.Controllers
                 {
                     Directory.CreateDirectory(path);
                 }
-                string filePath = Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode.png");
-                if (System.IO.File.Exists(filePath)) { 
-                    System.IO.File.Delete(filePath);
+
+                string filePath = Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode" + generateQRCode.QRCodeText + ".png");
+
+                if (System.IO.File.Exists(filePath))
+                {
+                    //System.IO.File.Delete(filePath);
+
+                    string imgExistedemoUrl = Path.Combine(_environment.ContentRootPath, "assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
+                    using MemoryStream ms = new MemoryStream();
+
+                    Image image = Image.FromFile(imgExistedemoUrl);
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ViewBag.QrCodeUri = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                    ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+
+                    return View();
                 };
+
                 barcode.SaveAsPng(filePath);
 
                 #endregion
@@ -58,20 +72,36 @@ namespace GenerateQRCode_Demo.Controllers
                 #region Create QR Image with Background Image (Watermarking !?)
                 //Image backgorundImage = Image.FromFile(@"C:\\Users\\User\\Desktop\\voucherForm.jpg");
                 Image backgorundImage = Image.FromFile("assets/img/voucherForm.png");
-                Image imageQR = Image.FromFile(Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode.png"));
+                Image imageQR = Image.FromFile(Path.Combine(_environment.WebRootPath, "GeneratedQRCode/qrcode" + generateQRCode.QRCodeText + ".png"));
                 Graphics outputDemo = Graphics.FromImage(backgorundImage);
                 //outputDemo.DrawImage(imageQR, backgorundImage.Width / 2 + 305, backgorundImage.Height / 2 + 105);
                 outputDemo.DrawImage(imageQR, 50, 50);
+
+
+                if (System.IO.File.Exists("assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png"))
+                {
+                    string imgExistedemoUrl = Path.Combine(_environment.ContentRootPath, "assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
+                    using MemoryStream ms = new MemoryStream();
+
+                    Image image = Image.FromFile(imgExistedemoUrl);
+                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ViewBag.QrCodeUri = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                    ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+
+                    return View();
+                };
+
                 backgorundImage.Save("assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
 
                 string imgDemoUrl = Path.Combine(_environment.ContentRootPath, "assets/img/tickets/ticket_" + generateQRCode.QRCodeText + ".png");
-                MemoryStream msDemo = new MemoryStream();
+                using MemoryStream msDemo = new MemoryStream();
+
                 Image img = Image.FromFile(imgDemoUrl);
                 img.Save(msDemo, System.Drawing.Imaging.ImageFormat.Png);
                 ViewBag.QrCodeUri = "data:image/png;base64," + Convert.ToBase64String(msDemo.ToArray());
                 ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(msDemo.ToArray());
-                msDemo.Flush();
                 msDemo.Close();
+                msDemo.Flush();
                 msDemo.Dispose();
                 imageQR.Dispose();
                 backgorundImage.Dispose();
@@ -102,7 +132,8 @@ namespace GenerateQRCode_Demo.Controllers
             }
             catch (Exception ex)
             {
-                throw;
+                ViewBag.Error = ex.Message;
+                return View("~/Views/Shared/Error.cshtml");
             }
             return View();
         }
@@ -140,7 +171,7 @@ namespace GenerateQRCode_Demo.Controllers
             #region Upload file
             if (file == null || file.Length == 0) 
             {
-                ViewBag.FileNotSelected = "File not selected!";
+                ViewBag.Error = "File not selected!";
                 return View("~/Views/Shared/Error.cshtml");
             }
 
@@ -148,7 +179,7 @@ namespace GenerateQRCode_Demo.Controllers
 
             if (fileExtension != ".xlsx" && fileExtension != ".xls")
             {
-                ViewBag.FileNotSelected = "Support Excel File only!";
+                ViewBag.Error = "Support Excel File only!";
                 return View("~/Views/Shared/Error.cshtml");
             }
 

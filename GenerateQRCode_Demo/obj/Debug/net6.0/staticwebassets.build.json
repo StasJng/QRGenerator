@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "W1oUpXRBG8az+K82Rap98mnkquOSOBHjCpYlL0JDdvo=",
+  "Hash": "drcAZ2DxeYINeHFlthuumueDeXY6IYa8kL6NNvvhR6s=",
   "Source": "GenerateQRCode_Demo",
   "BasePath": "_content/GenerateQRCode_Demo",
   "Mode": "Default",
@@ -270,6 +270,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\GeneratedQRCode\\qrcode_POIJOASNCOINASION.png"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\GeneratedQRCode\\qrcodewat.png",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "GeneratedQRCode/qrcodewat.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\GeneratedQRCode\\qrcodewat.png"
     },
     {
       "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\js\\site.js",
