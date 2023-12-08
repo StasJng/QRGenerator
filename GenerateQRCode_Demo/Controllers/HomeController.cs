@@ -290,5 +290,112 @@ namespace GenerateQRCode_Demo.Controllers
 
         //    return path;
         //}
+        
+        public IActionResult MinimizeImages()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> UploadFileThenMinimize(IFormFile file)
+        {
+            #region Upload file
+            if (file == null || file.Length == 0)
+            {
+                ViewBag.Error = "File not selected!";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+
+            string fileExtension = Path.GetExtension(file.FileName);
+
+            if (fileExtension != ".png")
+            {
+                ViewBag.Error = "Support PNG Image only!";
+                return View("~/Views/Shared/Error.cshtml");
+            }
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.GetFilename());
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            #endregion
+
+            #region Generate Minimized Image
+            try
+            {
+                DisplayingCodeInfo minimizedImage = new DisplayingCodeInfo();
+
+                // First load the image
+                Image myImage = Image.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", file.GetFilename()), true);
+
+                #region Save the image with a quality of 50% 
+                var quality = 50; // Saves an image as a jpeg image, with the given quality 
+
+                // Encoder parameter for image quality 
+                EncoderParameter qualityParam = new EncoderParameter(Encoder.Quality, quality);
+
+                // PNG image codec 
+                ImageCodecInfo pngCodec = GetEncoderInfo("image/png");
+                EncoderParameters encoderParams = new EncoderParameters(1);
+                encoderParams.Param[0] = qualityParam;
+
+                string filePath = Path.Combine(_environment.WebRootPath, "GeneratedQRCode/minimized_image" + ".png");
+                
+                System.IO.File.Delete(filePath); //Remove file uploaded
+
+                myImage.Save(filePath, pngCodec, encoderParams);
+
+                string fileName = Path.GetFileName(filePath);
+                string imageUrl = $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}" + "/GeneratedQRCode/" + fileName;
+                #endregion
+
+                #region Use Memory Stream diplay image
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead(filePath);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (Bitmap bitMap = new Bitmap(stream))
+                    {
+                        if (bitMap != null)
+                        {
+                            bitMap.Save(ms, ImageFormat.Png);
+                        }
+                        var qrResult = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                        ViewBag.linkDownload = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                    }
+                }
+
+                minimizedImage.No = 0;
+                minimizedImage.QRCodeUri = imageUrl;
+                minimizedImage.LinkDownload = ViewBag.linkDownload;
+
+                ViewBag.minimizedImage = minimizedImage;
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            #endregion
+
+
+            return View("~/Views/Home/MinimizeImages.cshtml");
+        }
+
+        // Returns the image codec with the given mime type 
+        private ImageCodecInfo GetEncoderInfo(string mimeType) 
+        { 
+            // Get image codecs for all image formats 
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders(); 
+
+            // Find the correct image codec 
+            for(int i=0; i<codecs.Length; i++) 
+                if(codecs[i].MimeType == mimeType) 
+                    return codecs[i]; 
+
+            return null; 
+        } 
     }
 }

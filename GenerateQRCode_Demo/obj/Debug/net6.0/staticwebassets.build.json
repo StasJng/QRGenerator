@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PpstVKuaqG0GOMH4zNJhJv+B0eCXYkc//FqBu6fp7As=",
+  "Hash": "1WoBzCM5EUIwoz1lqsUCUoha2rfsI1sylua4wnGbOV4=",
   "Source": "GenerateQRCode_Demo",
   "BasePath": "_content/GenerateQRCode_Demo",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\GenerateQRCode_Demo.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\1900x500-Mua-1-tang-1_07122023173904.png",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "1900x500-Mua-1-tang-1_07122023173904.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\1900x500-Mua-1-tang-1_07122023173904.png"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\AttributeZones.png",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "AttributeZones.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\AttributeZones.png"
     },
     {
       "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\css\\site.css",
@@ -100,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\GeneratedQRCode\\minimized_image.png",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "GeneratedQRCode/minimized_image.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\GeneratedQRCode\\minimized_image.png"
     },
     {
       "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\GeneratedQRCode\\qrcode.png",
@@ -1358,6 +1409,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\order detail.png",
+      "SourceId": "GenerateQRCode_Demo",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\2_demo_project\\DemoGenerateQRCodeMVCCore6\\QRGenerator\\GenerateQRCode_Demo\\wwwroot\\",
+      "BasePath": "_content/GenerateQRCode_Demo",
+      "RelativePath": "order detail.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\order detail.png"
     }
   ]
 }

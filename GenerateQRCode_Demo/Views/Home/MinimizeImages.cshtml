@@ -1,0 +1,74 @@
+﻿@model GenerateQRCode_Demo.Models.GenerateQRCodeModel
+
+@{
+    ViewData["Title"] = "MinimizeImages";
+}
+<style>
+    .pos-center {
+        margin: 0 auto;
+        vertical-align: middle;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .form-group {
+        margin: 10px 0;
+    }
+    .box-qr {
+        border: 1px solid #cdcdcd;
+        border-radius: 10px;
+        padding: 10px 0;
+        margin: -5px;
+    }
+</style>
+
+<h1>CreateQRCode</h1>
+
+<div class="row">
+    <div class="">
+        <br/>
+        <h2>Import file and generate QR:</h2>
+        <form asp-controller="Home" asp-action="UploadFileThenMinimize" method="post" enctype="multipart/form-data">
+            <input type="file" id="myFile" name="file"/>
+            <button type="submit" class="btn btn-primary">Upload File & Minimize</button>
+        </form>
+        @if (ViewBag.minimizedImage != null)
+        {
+            <div class="row" style="margin: 10px 0 0 0">
+                <div class="col-lg-3 col-md-4 col-sm-12 box-qr">
+                    <div class="container pos-center">
+                        <div class="form-group">
+                        <img src="@ViewBag.minimizedImage.QRCodeUri" class="img-thumbnail" />
+                        </div>
+                    </div>
+                    <div class="container pos-center">
+                        <a id="download + @ViewBag.minimizedImage.No" style="" download="qr-@ViewBag.minimizedImage.No" href="@ViewBag.minimizedImage.LinkDownload" class="btn btn-primary">Download</a>
+                        </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+function pickAFile() { 
+    var fileName = document.getElementById('myFile').value.substr(12);
+    console.log(fileName);
+    $.ajax({
+        type: "post",
+        url: "/Home/PickAFile",
+        data: {
+            fileName: fileName
+        },
+        success: function(d) {
+            console.log('Success!');
+            console.log('path: ' + d)
+        }
+    });
+};
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
